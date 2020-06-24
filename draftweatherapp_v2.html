@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>DRAFT Weather App</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script
+      src="https://kit.fontawesome.com/65d9d4f532.js"
+      crossorigin="anonymous"
+    ></script>
+    <link rel="stylesheet" href="src/style.css" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="page-container">
+      <div id="content-wrap">
+        <header>
+          <div class="container">
+            <img src="img/teather-logo.png" class="logo-image" />
+            <form>
+              <div>
+                <button
+                  type="submit"
+                  class="btn btn-primary"
+                  id="current-locale-button"
+                >
+                  &#x1f4cd;
+                </button>
+              </div>
+              <div class="form-group departure">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="enterDeparture"
+                  placeholder="Leaving from    🛫"
+                />
+              </div>
+              <div class="form-group arrival">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="enterArrival"
+                  placeholder="Destination     🛬"
+                />
+              </div>
+              <div>
+                <button
+                  type="submit"
+                  class="btn btn-primary search-button"
+                  id="get-weather-button"
+                >
+                  Get Weather &#127782;&#65039;
+                </button>
+              </div>
+            </form>
+          </div>
+        </header>
+        <div class="container text-center current-temp-container">
+          <div class="row justify-content-between">
+            <div class="col-sm-6 text-left today-weather-heading">
+              <h2>Today</h2>
+            </div>
+            <div class="col-sm-6 text-right today-date">
+              <h4 id="dateHeading">Friday, June 18 2020</h4>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-heading" id="fromCity">New York</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-4">
+                  <i class="fas fa-cloud-showers-heavy fa-5x"></i>
+                </div>
+                <div class="col-sm-4">
+                  <h3 id="fromTempTop">73° F</h3>
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-sm temp-unit"
+                    id="temp-button-top"
+                  >
+                    ️ &#x1F321;&#xFE0F; &deg; F / &deg; C
+                  </button>
+                </div>
+                <div class="col-sm-4 rise-set-time">
+                  &#127749; Sunrise 5:43 am <br />
+                  &#127751; Sunset 8:31 pm <br />
+                  &#128166; Precipitation: 90%
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-heading" id="toCity">Los Angeles</div>
+            <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-4">
+                  <i class="fas fa-sun fa-5x"></i>
+                </div>
+                <div class="col-sm-4">
+                  <h3 id="fromTempBtm">88° F</h3>
+                  <button
+                    type="button"
+                    class="btn btn-secondary btn-sm temp-unit"
+                    id="temp-button-btm"
+                  >
+                    &#x1F321;&#xFE0F; &deg; F / &deg; C
+                  </button>
+                </div>
+                <div class="col-sm-4 rise-set-time">
+                  &#127749; Sunrise 5:43 am <br />
+                  &#127751; Sunset 8:31 pm <br />
+                  &#128166; Precipitation: 10%
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container text-center future-temp-container">
+          <div class="row">
+            <div class="col-sm-6 text-left future-weather-heading">
+              <h2>Next 5 Days</h2>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <div class="panel">
+                <div class="panel-heading" id="fromCityFiveDay">New York</div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-sm-4">M</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">T</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">W</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">T</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">F</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="panel">
+                <div class="panel-heading" id="toCityFiveDay">Los Angeles</div>
+                <div class="panel-body">
+                  <div class="row">
+                    <div class="col-sm-4">M</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">T</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">W</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">T</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-4">F</div>
+                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4"><i class="fas fa-sun"></i></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container illustrations-container">
+          <div class="row">
+            <div class="col-sm-6">
+              <img src="img/weather (1).svg" class="forecast-illustration" />
+            </div>
+            <div class="col-sm-6">
+              <img src="img/rain.svg" class="rain-illustration" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <img src="img/sun.svg" class="desert-illustration" />
+            </div>
+            <div class="col-sm-6">
+              <img src="img/snow.svg" class="snow-illustration" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer>
+      Coded by: Alyssa Harper
+    </footer>
+  </body>
+  <script src="src/weather.js"></script>
+</html>
