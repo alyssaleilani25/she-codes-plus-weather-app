@@ -187,3 +187,18 @@ footer {
   font-family: "Courier New", Courier, monospace;
   font-size: 12pt;
 }
+
+.github-link {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.github-link:hover {
+  color: #ffffff;
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.github-link:visited {
+  color: #ffffff;
+}
