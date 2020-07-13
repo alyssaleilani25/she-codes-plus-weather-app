@@ -83,7 +83,10 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-sm-4">
-                  <i class="fas fa-cloud-showers-heavy fa-5x"></i>
+                  <i
+                    class="fas fa-cloud-showers-heavy fa-5x"
+                    id="weatherIconDeparture"
+                  ></i>
                 </div>
                 <div class="col-sm-4">
                   <h3 id="fromTempTop">73° F</h3>
@@ -95,10 +98,10 @@
                     ️ &#x1F321;&#xFE0F; &deg; F / &deg; C
                   </button>
                 </div>
-                <div class="col-sm-4 rise-set-time">
-                  &#127749; Sunrise 5:43 am <br />
-                  &#127751; Sunset 8:31 pm <br />
-                  &#128166; Precipitation: 90%
+                <div class="col-sm-4 humidity-and-wind">
+                  &#128166; Humidity:
+                  <span id="departureHumidity">10%</span> <br />
+                  &#x1f32c; Wind: <span id="departureWind">25 mph</span>
                 </div>
               </div>
             </div>
@@ -108,7 +111,7 @@
             <div class="panel-body">
               <div class="row">
                 <div class="col-sm-4">
-                  <i class="fas fa-sun fa-5x"></i>
+                  <i class="fas fa-sun fa-5x" id="weatherIconArrival"></i>
                 </div>
                 <div class="col-sm-4">
                   <h3 id="fromTempBtm">88° F</h3>
@@ -120,10 +123,10 @@
                     &#x1F321;&#xFE0F; &deg; F / &deg; C
                   </button>
                 </div>
-                <div class="col-sm-4 rise-set-time">
-                  &#127749; Sunrise 5:43 am <br />
-                  &#127751; Sunset 8:31 pm <br />
-                  &#128166; Precipitation: 10%
+                <div class="col-sm-4 humidity-and-wind">
+                  &#128166; Humidity:
+                  <span id="arrivalHumidity">10%</span> <br />
+                  &#x1f32c; Wind: <span id="arrivalWind">25 mph</span>
                 </div>
               </div>
             </div>

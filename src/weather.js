@@ -31,16 +31,28 @@ currentLocaleButton.addEventListener("click", getCurrentLocation);
 //Add search engine
 //Display current city & temp
 
-function showTemp(response) {
+function showDepartureCityWeather(response) {
   let departureTempNow = Math.round(response.data.main.temp);
+  let departureHumidity = Math.round(response.data.main.humidity);
+  let departureWind = Math.round(response.data.wind.speed);
   let displayTemp = document.getElementById("fromTempTop");
+  let departureHumidityElement = document.getElementById("departureHumidity");
+  let departureWindElement = document.getElementById("departureWind");
   displayTemp.innerHTML = `${departureTempNow}° F`;
+  departureHumidityElement.innerHTML = `${departureHumidity}%`;
+  departureWindElement.innerHTML = `${departureWind} mph`;
 }
 
-function showTempBtm(response) {
+function showArrivalCityWeather(response) {
   let arrivalTempNow = Math.round(response.data.main.temp);
+  let arrivalHumidity = Math.round(response.data.main.humidity);
+  let arrivalWind = Math.round(response.data.wind.speed);
   let displayTemp = document.getElementById("fromTempBtm");
+  let arrivalHumidityElement = document.getElementById("arrivalHumidity");
+  let arrivalWindElement = document.getElementById("arrivalWind");
   displayTemp.innerHTML = `${arrivalTempNow}° F`;
+  arrivalHumidityElement.innerHTML = `${arrivalHumidity}%`;
+  arrivalWindElement.innerHTML = `${arrivalWind} mph`;
 }
 
 function userSubmitCities(event) {
@@ -62,8 +74,10 @@ function userSubmitCities(event) {
     let apiKey = "27e752237bc0828f4f7f01fa505fc851";
     let apiUrlLeavingFrom = `https://api.openweathermap.org/data/2.5/weather?q=${departureSelected.value}&units=imperial`;
     let apiUrlGoingTo = `https://api.openweathermap.org/data/2.5/weather?q=${arrivalSelected.value}&units=imperial`;
-    axios.get(`${apiUrlLeavingFrom}&appid=${apiKey}`).then(showTemp);
-    axios.get(`${apiUrlGoingTo}&appid=${apiKey}`).then(showTempBtm);
+    axios
+      .get(`${apiUrlLeavingFrom}&appid=${apiKey}`)
+      .then(showDepartureCityWeather);
+    axios.get(`${apiUrlGoingTo}&appid=${apiKey}`).then(showArrivalCityWeather);
   } else {
     alert("Please enter DEPARTURE & ARRIVAL city");
   }
