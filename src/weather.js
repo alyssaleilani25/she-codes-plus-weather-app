@@ -29,16 +29,20 @@ let currentLocaleButton = document.getElementById("current-locale-button");
 currentLocaleButton.addEventListener("click", getCurrentLocation);
 
 //Add search engine
-//Display current city & current weather
+//Display current city, current weather, & forecast
 
 function showDepartureCityWeather(response) {
   let departureTempNow = Math.round(response.data.main.temp);
   let departureHumidity = Math.round(response.data.main.humidity);
   let departureWind = Math.round(response.data.wind.speed);
+  let departureDescription = response.data.weather[0].description;
   let displayTemp = document.getElementById("fromTempTop");
   let departureHumidityElement = document.getElementById("departureHumidity");
   let departureWindElement = document.getElementById("departureWind");
   let departureWeatherIcon = document.getElementById("weatherIconDeparture");
+  let departureDescriptionElement = document.getElementById(
+    "departureDescription"
+  );
   displayTemp.innerHTML = `${departureTempNow}° F`;
   departureHumidityElement.innerHTML = `${departureHumidity}%`;
   departureWindElement.innerHTML = `${departureWind} mph`;
@@ -46,16 +50,19 @@ function showDepartureCityWeather(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  departureDescriptionElement.innerHTML = `${departureDescription}`;
 }
 
 function showArrivalCityWeather(response) {
   let arrivalTempNow = Math.round(response.data.main.temp);
   let arrivalHumidity = Math.round(response.data.main.humidity);
   let arrivalWind = Math.round(response.data.wind.speed);
+  let arrivalDescription = response.data.weather[0].description;
   let displayTemp = document.getElementById("fromTempBtm");
   let arrivalHumidityElement = document.getElementById("arrivalHumidity");
   let arrivalWindElement = document.getElementById("arrivalWind");
   let arrivalWeatherIcon = document.getElementById("weatherIconArrival");
+  let arrivalDescriptionElement = document.getElementById("arrivalDescription");
   displayTemp.innerHTML = `${arrivalTempNow}° F`;
   arrivalHumidityElement.innerHTML = `${arrivalHumidity}%`;
   arrivalWindElement.innerHTML = `${arrivalWind} mph`;
@@ -63,6 +70,105 @@ function showArrivalCityWeather(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  arrivalDescriptionElement.innerHTML = `${arrivalDescription}`;
+}
+
+function formatHours(timestamp) {
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  if (hours < 10) {
+    hours = `0${hours}`;
+  }
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+    minutes = `0${minutes}`;
+  }
+  return `${hours}:${minutes}`;
+}
+
+function displayForecast(response) {
+  let upcomingForecastElement = document.getElementById("upcomingForecast");
+  let forecast = response.data.list[2];
+
+  upcomingForecastElement.innerHTML = `
+  <div class="row">
+  <div class="col-sm-4 forecast-time-temp-display">${formatHours(
+    forecast.dt * 1000
+  )}</div>
+    <div class="col-sm-4 forecast-time-temp-display">${Math.round(
+      forecast.main.temp
+    )}&deg; F</div>
+    <div class="col-sm-4">
+      <img
+        src="http://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png"
+        class="weather-icon-little"
+      />
+    </div>
+    </div>
+    `;
+
+  forecast = response.data.list[4];
+  upcomingForecastElement.innerHTML =
+    upcomingForecastElement.innerHTML +
+    ` <div class="row">
+  <div class="col-sm-4 forecast-time-temp-display">${formatHours(
+    forecast.dt * 1000
+  )}</div>
+    <div class="col-sm-4 forecast-time-temp-display">${Math.round(
+      forecast.main.temp
+    )}&deg; F</div>
+    <div class="col-sm-4">
+      <img
+        src="http://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png"
+        class="weather-icon-little"
+      />
+    </div>
+    </div>
+    `;
+  forecast = response.data.list[6];
+  upcomingForecastElement.innerHTML =
+    upcomingForecastElement.innerHTML +
+    `<div class="row">
+  <div class="col-sm-4 forecast-time-temp-display">${formatHours(
+    forecast.dt * 1000
+  )}</div>
+    <div class="col-sm-4 forecast-time-temp-display">${Math.round(
+      forecast.main.temp
+    )}&deg; F</div>
+    <div class="col-sm-4">
+      <img
+        src="http://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png"
+        class="weather-icon-little"
+      />
+    </div>
+    </div>
+    `;
+  forecast = response.data.list[8];
+  upcomingForecastElement.innerHTML =
+    upcomingForecastElement.innerHTML +
+    `<div class="row">
+  <div class="col-sm-4 forecast-time-temp-display">${formatHours(
+    forecast.dt * 1000
+  )}</div>
+    <div class="col-sm-4 forecast-time-temp-display">${Math.round(
+      forecast.main.temp
+    )}&deg; F</div>
+    <div class="col-sm-4">
+      <img
+        src="http://openweathermap.org/img/wn/${
+          forecast.weather[0].icon
+        }@2x.png"
+        class="weather-icon-little"
+      />
+    </div>
+    </div>
+    `;
 }
 
 function userSubmitCities(event) {
@@ -71,15 +177,11 @@ function userSubmitCities(event) {
   let arrivalSelected = document.querySelector("input#enterArrival");
   let leavingFrom = document.querySelector(".panel-heading#fromCity");
   let goingTo = document.querySelector(".panel-heading#toCity");
-  let leavingFromFive = document.querySelector(
-    ".panel-heading#fromCityFiveDay"
-  );
   let goingToFive = document.querySelector(".panel-heading#toCityFiveDay");
 
   if (departureSelected.value && arrivalSelected.value) {
     leavingFrom.innerHTML = `${departureSelected.value}`;
     goingTo.innerHTML = `${arrivalSelected.value}`;
-    leavingFromFive.innerHTML = `${departureSelected.value}`;
     goingToFive.innerHTML = `${arrivalSelected.value}`;
     let apiKey = "27e752237bc0828f4f7f01fa505fc851";
     let apiUrlLeavingFrom = `https://api.openweathermap.org/data/2.5/weather?q=${departureSelected.value}&units=imperial`;
@@ -88,6 +190,9 @@ function userSubmitCities(event) {
       .get(`${apiUrlLeavingFrom}&appid=${apiKey}`)
       .then(showDepartureCityWeather);
     axios.get(`${apiUrlGoingTo}&appid=${apiKey}`).then(showArrivalCityWeather);
+
+    let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${arrivalSelected.value}&units=imperial`;
+    axios.get(`${apiUrlForecast}&appid=${apiKey}`).then(displayForecast);
   } else {
     alert("Please enter DEPARTURE & ARRIVAL city");
   }

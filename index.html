@@ -8,10 +8,6 @@
       rel="stylesheet"
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <link
@@ -72,7 +68,7 @@
         <div class="container text-center current-temp-container">
           <div class="row justify-content-between">
             <div class="col-sm-6 text-left today-weather-heading">
-              <h2>Today</h2>
+              <h2>Current</h2>
             </div>
             <div class="col-sm-6 text-right today-date">
               <h4 id="dateHeading">Friday, June 18 2020</h4>
@@ -82,12 +78,13 @@
             <div class="panel-heading" id="fromCity">New York</div>
             <div class="panel-body">
               <div class="row">
-                <div class="col-sm-4">
+                <div class="col-sm-4 departure-icon-description">
                   <img
                     src="http://openweathermap.org/img/wn/02d@2x.png"
                     class="weather-icon"
                     id="weatherIconDeparture"
                   />
+                  <span id="departureDescription">Few Clouds</span>
                 </div>
                 <div class="col-sm-4">
                   <h3 id="fromTempTop">73° F</h3>
@@ -117,6 +114,7 @@
                     class="weather-icon"
                     id="weatherIconArrival"
                   />
+                  <span id="arrivalDescription">Few Clouds</span>
                 </div>
                 <div class="col-sm-4">
                   <h3 id="fromTempBtm">88° F</h3>
@@ -140,17 +138,21 @@
         <div class="container text-center future-temp-container">
           <div class="row">
             <div class="col-sm-6 text-left future-weather-heading">
-              <h2>Next 5 Days</h2>
+              <h2>Next 24 Hours</h2>
             </div>
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <div class="panel">
-                <div class="panel-heading" id="fromCityFiveDay">New York</div>
-                <div class="panel-body">
+          <div class="col-sm-12">
+            <div class="panel">
+              <div class="panel-heading" id="toCityFiveDay">Los Angeles</div>
+              <div class="panel-body">
+                <div id="upcomingForecast">
                   <div class="row">
-                    <div class="col-sm-4">M</div>
-                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4 forecast-time-temp-display">
+                      6 Hours
+                    </div>
+                    <div class="col-sm-4 forecast-time-temp-display">
+                      87&deg; F
+                    </div>
                     <div class="col-sm-4">
                       <img
                         src="http://openweathermap.org/img/wn/02d@2x.png"
@@ -159,8 +161,12 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-4">T</div>
-                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4 forecast-time-temp-display">
+                      12 Hours
+                    </div>
+                    <div class="col-sm-4 forecast-time-temp-display">
+                      87&deg; F
+                    </div>
                     <div class="col-sm-4">
                       <img
                         src="http://openweathermap.org/img/wn/02d@2x.png"
@@ -169,8 +175,12 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-4">W</div>
-                    <div class="col-sm-4">87&deg; F</div>
+                    <div class="col-sm-4 forecast-time-temp-display">
+                      18 Hours
+                    </div>
+                    <div class="col-sm-4 forecast-time-temp-display">
+                      87&deg; F
+                    </div>
                     <div class="col-sm-4">
                       <img
                         src="http://openweathermap.org/img/wn/02d@2x.png"
@@ -179,75 +189,12 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-sm-4">T</div>
-                    <div class="col-sm-4">87&deg; F</div>
-                    <div class="col-sm-4">
-                      <img
-                        src="http://openweathermap.org/img/wn/02d@2x.png"
-                        class="weather-icon-little"
-                      />
+                    <div class="col-sm-4 forecast-time-temp-display">
+                      24 Hours
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-4">F</div>
-                    <div class="col-sm-4">87&deg; F</div>
-                    <div class="col-sm-4">
-                      <img
-                        src="http://openweathermap.org/img/wn/02d@2x.png"
-                        class="weather-icon-little"
-                      />
+                    <div class="col-sm-4 forecast-time-temp-display">
+                      87&deg; F
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-6">
-              <div class="panel">
-                <div class="panel-heading" id="toCityFiveDay">Los Angeles</div>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-sm-4">M</div>
-                    <div class="col-sm-4">87&deg; F</div>
-                    <div class="col-sm-4">
-                      <img
-                        src="http://openweathermap.org/img/wn/02d@2x.png"
-                        class="weather-icon-little"
-                      />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-4">T</div>
-                    <div class="col-sm-4">87&deg; F</div>
-                    <div class="col-sm-4">
-                      <img
-                        src="http://openweathermap.org/img/wn/02d@2x.png"
-                        class="weather-icon-little"
-                      />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-4">W</div>
-                    <div class="col-sm-4">87&deg; F</div>
-                    <div class="col-sm-4">
-                      <img
-                        src="http://openweathermap.org/img/wn/02d@2x.png"
-                        class="weather-icon-little"
-                      />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-4">T</div>
-                    <div class="col-sm-4">87&deg; F</div>
-                    <div class="col-sm-4">
-                      <img
-                        src="http://openweathermap.org/img/wn/02d@2x.png"
-                        class="weather-icon-little"
-                      />
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-sm-4">F</div>
-                    <div class="col-sm-4">87&deg; F</div>
                     <div class="col-sm-4">
                       <img
                         src="http://openweathermap.org/img/wn/02d@2x.png"
@@ -260,22 +207,22 @@
             </div>
           </div>
         </div>
-        <div class="container illustrations-container">
-          <div class="row">
-            <div class="col-sm-6">
-              <img src="img/weather (1).svg" class="forecast-illustration" />
-            </div>
-            <div class="col-sm-6">
-              <img src="img/rain.svg" class="rain-illustration" />
-            </div>
+      </div>
+      <div class="container illustrations-container">
+        <div class="row">
+          <div class="col-sm-6">
+            <img src="img/weather (1).svg" class="forecast-illustration" />
           </div>
-          <div class="row">
-            <div class="col-sm-6">
-              <img src="img/sun.svg" class="desert-illustration" />
-            </div>
-            <div class="col-sm-6">
-              <img src="img/snow.svg" class="snow-illustration" />
-            </div>
+          <div class="col-sm-6">
+            <img src="img/rain.svg" class="rain-illustration" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-6">
+            <img src="img/sun.svg" class="desert-illustration" />
+          </div>
+          <div class="col-sm-6">
+            <img src="img/snow.svg" class="snow-illustration" />
           </div>
         </div>
       </div>
@@ -289,6 +236,6 @@
         >open-sourced</a
       >
     </footer>
+    <script src="src/weather.js"></script>
   </body>
-  <script src="src/weather.js"></script>
 </html>

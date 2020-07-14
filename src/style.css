@@ -45,17 +45,18 @@ form {
 
 #current-locale-button {
   margin-left: 50px;
-  margin-top: 1px;
+  margin-top: 3px;
   padding: 5px 5px;
   box-shadow: 4px 3px 6px -2px #212121;
-  background-color: #ffffff;
-  border-radius: 100%;
+  background-color: #cecece;
+  border-radius: 12px;
   transition: all 0.5s ease;
   outline: none;
+  border: none;
 }
 
 #current-locale-button:hover {
-  background-color: #9e9e9e;
+  background-color: #ec6e4d;
 }
 
 .departure {
@@ -84,7 +85,7 @@ form {
 }
 
 .search-button:hover {
-  background-color: #9e9e9e;
+  background-color: #ec6e4d;
 }
 
 .current-temp-container {
@@ -123,8 +124,14 @@ h4 {
 }
 
 .weather-icon {
-  width: 110px;
+  width: 100px;
   margin: 0 auto;
+}
+
+#departureDescription,
+#arrivalDescription {
+  font-size: 13pt;
+  text-transform: capitalize;
 }
 
 h3 {
@@ -157,14 +164,16 @@ h3 {
   float: left;
 }
 
+.forecast-time-temp-display {
+  padding-top: 10px;
+}
 .weather-icon-little {
-  width: 30px;
-  margin-top: 0;
+  width: 40px;
 }
 
 .illustrations-container {
   background: #fafafa;
-  margin-top: 23px;
+  margin-top: 5px;
   max-width: 35%;
   float: right;
 }
