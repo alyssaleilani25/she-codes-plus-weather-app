@@ -171,6 +171,35 @@ function displayForecast(response) {
     `;
 }
 
+//Show Default Weather on Page Load
+function defaultDepatureCity(defaultDepartureCityName) {
+  let apiKey = "27e752237bc0828f4f7f01fa505fc851";
+  let apiUrlLeavingFrom = `https://api.openweathermap.org/data/2.5/weather?q=${defaultDepartureCityName}&units=imperial`;
+  axios
+    .get(`${apiUrlLeavingFrom}&appid=${apiKey}`)
+    .then(showDepartureCityWeather);
+  let leavingFrom = document.querySelector(".panel-heading#fromCity");
+  leavingFrom.innerHTML = `${defaultDepartureCityName}`;
+}
+
+defaultDepatureCity("Miami");
+
+function defaultDestinationCity(defaultDestinationCityName) {
+  let apiKey = "27e752237bc0828f4f7f01fa505fc851";
+  let apiUrlGoingTo = `https://api.openweathermap.org/data/2.5/weather?q=${defaultDestinationCityName}&units=imperial`;
+  axios.get(`${apiUrlGoingTo}&appid=${apiKey}`).then(showArrivalCityWeather);
+  let goingTo = document.querySelector(".panel-heading#toCity");
+  let goingToFive = document.querySelector(".panel-heading#toCityFiveDay");
+  goingTo.innerHTML = `${defaultDestinationCityName}`;
+  goingToFive.innerHTML = `${defaultDestinationCityName}`;
+  let apiUrlForecast = `https://api.openweathermap.org/data/2.5/forecast?q=${defaultDestinationCityName}&units=imperial`;
+  axios.get(`${apiUrlForecast}&appid=${apiKey}`).then(displayForecast);
+}
+
+defaultDestinationCity("Ibiza");
+
+//Sedarch for Cities Entered by User
+
 function userSubmitCities(event) {
   event.preventDefault();
   let departureSelected = document.querySelector("input#enterDeparture");
