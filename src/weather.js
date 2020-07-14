@@ -29,7 +29,7 @@ let currentLocaleButton = document.getElementById("current-locale-button");
 currentLocaleButton.addEventListener("click", getCurrentLocation);
 
 //Add search engine
-//Display current city & temp
+//Display current city & current weather
 
 function showDepartureCityWeather(response) {
   let departureTempNow = Math.round(response.data.main.temp);
@@ -38,9 +38,14 @@ function showDepartureCityWeather(response) {
   let displayTemp = document.getElementById("fromTempTop");
   let departureHumidityElement = document.getElementById("departureHumidity");
   let departureWindElement = document.getElementById("departureWind");
+  let departureWeatherIcon = document.getElementById("weatherIconDeparture");
   displayTemp.innerHTML = `${departureTempNow}° F`;
   departureHumidityElement.innerHTML = `${departureHumidity}%`;
   departureWindElement.innerHTML = `${departureWind} mph`;
+  departureWeatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 
 function showArrivalCityWeather(response) {
@@ -50,9 +55,14 @@ function showArrivalCityWeather(response) {
   let displayTemp = document.getElementById("fromTempBtm");
   let arrivalHumidityElement = document.getElementById("arrivalHumidity");
   let arrivalWindElement = document.getElementById("arrivalWind");
+  let arrivalWeatherIcon = document.getElementById("weatherIconArrival");
   displayTemp.innerHTML = `${arrivalTempNow}° F`;
   arrivalHumidityElement.innerHTML = `${arrivalHumidity}%`;
   arrivalWindElement.innerHTML = `${arrivalWind} mph`;
+  arrivalWeatherIcon.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 
 function userSubmitCities(event) {
